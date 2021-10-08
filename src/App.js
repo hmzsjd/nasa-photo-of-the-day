@@ -7,13 +7,17 @@ import Title from './Title';
 import Image from './Image';
 import Details from './Details';
 import Date from './Date';
-import Dropdown from './Dropdown';
+import { DATE } from './Date';
 
 
 
+
+
+// &date=2021-09-01
 
 
 import styled from 'styled-components';
+
 
 
 const BASE_URL = "https://api.nasa.gov/planetary/apod";
@@ -41,21 +45,25 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
 `
 
-
+let RANDOM = "";
 
 function App() {
   //state of API data
   const [apiData, setAPIData] = useState(null);
 
+
+
   useEffect(() => {
-    axios.get(`${BASE_URL}?api_key=${API_KEY}`)
+    axios.get(`${BASE_URL}?api_key=${API_KEY}${DATE}`)
       .then(res => {
         setAPIData(res.data);
       }).catch(err => {
         console.error(err);
       })
-  }, [])
+  }, [apiData])
 
+
+  
 
 
 
@@ -71,8 +79,8 @@ function App() {
       
       {<h1>Nasa Photo Of The Day: </h1>}
 
-      <Dropdown />
-  
+      
+        
   
 
 
